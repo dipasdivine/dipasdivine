@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Dipa Signature Realms Icon">
+  <defs>
+    <linearGradient id="uRing" x1="0.08" y1="0.1" x2="0.9" y2="0.92">
+      <stop offset="0%" stop-color="#f472b6"/>
+      <stop offset="45%" stop-color="#e0bf62"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="uCore" x1="0.2" y1="0.1" x2="0.8" y2="0.94">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="108" fill="#09070f"/>
+  <circle cx="256" cy="256" r="184" fill="none" stroke="url(#uRing)" stroke-width="16"/>
+  <path d="M256 152 L302 242 L256 332 L210 242 Z" fill="url(#uCore)"/>
+  <path d="M199 218 C173 192 170 158 198 146 C226 134 244 159 243 182 C242 198 229 212 209 223 Z" fill="#f9a8d4" opacity="0.9"/>
+  <path d="M314 212 C334 184 370 178 383 206 C396 234 372 257 349 258 C333 259 320 249 313 229 Z" fill="#fcd34d" opacity="0.9"/>
+  <path d="M251 108 L261 128 L282 131 L266 147 L270 168 L251 158 L232 168 L236 147 L220 131 L241 128 Z" fill="#dbeafe"/>
+  <path d="M256 338 C278 348 291 369 291 390 C291 401 282 410 270 410 C258 410 248 401 248 389 C248 381 250 376 256 368 C262 376 264 381 264 389 C264 394 260 398 255 398 C250 398 246 394 246 389 C246 369 234 348 256 338 Z" fill="#86efac" opacity="0.9"/>
+</svg>

@@ -1,0 +1,13 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Upload your own image placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1C1530"/>
+      <stop offset="100%" stop-color="#0B0B0E"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect x="110" y="90" width="580" height="420" rx="24" fill="none" stroke="#D4AF37" stroke-opacity="0.65" stroke-width="4" stroke-dasharray="12 10"/>
+  <circle cx="280" cy="260" r="45" fill="#6D28D9" fill-opacity="0.45"/>
+  <path d="M180 430L300 310L380 390L470 290L620 430" fill="none" stroke="#FFFFFF" stroke-opacity="0.68" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="400" y="510" text-anchor="middle" fill="#D4AF37" font-family="Arial, sans-serif" font-size="28" font-weight="700">Replace with your own image</text>
+</svg>

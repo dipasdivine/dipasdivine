@@ -1,0 +1,18 @@
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="waGlow" x1="14" y1="10" x2="84" y2="86" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#66F3B0"/>
+      <stop offset="0.52" stop-color="#22D66B"/>
+      <stop offset="1" stop-color="#0D8F3F"/>
+    </linearGradient>
+    <radialGradient id="waShine" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(35 26) rotate(46) scale(54)">
+      <stop stop-color="#E8FFF4" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#E8FFF4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="48" cy="48" r="42" fill="url(#waGlow)"/>
+  <circle cx="48" cy="48" r="42" fill="url(#waShine)"/>
+  <path d="M67.3 50.1C67.3 61.1 58.6 69.9 47.8 69.9C43.8 69.9 40.1 68.7 37 66.8L26.8 69.9L30.2 59.9C28.1 56.7 26.9 52.8 26.9 48.6C26.9 37.6 35.6 28.8 46.4 28.8C57.2 28.8 67.3 39.1 67.3 50.1Z" fill="white"/>
+  <path d="M55.8 54.7C55.3 54.4 52.8 53.1 52.3 52.9C51.9 52.8 51.5 52.7 51.1 53.1C50.8 53.5 49.8 54.6 49.5 55C49.2 55.3 48.9 55.4 48.4 55.2C47.9 54.9 46.2 54.4 44.2 52.6C42.6 51.2 41.6 49.5 41.3 49C41 48.5 41.3 48.3 41.6 48L42.5 47.1C42.8 46.8 42.9 46.6 43.1 46.2C43.2 45.8 43.2 45.5 43.1 45.1C42.9 44.8 41.9 42.3 41.5 41.4C41.1 40.5 40.8 40.7 40.5 40.7H39.5C39.1 40.7 38.5 40.9 38.1 41.3C37.7 41.8 36.6 42.8 36.6 45C36.6 47.3 38.2 49.5 38.5 49.9C38.9 50.3 41.8 55.3 46.7 57.4C51.6 59.4 51.6 58.8 52.5 58.7C53.3 58.6 55.1 57.8 55.5 56.6C55.9 55.3 56.2 55 55.8 54.7Z" fill="#13A44A"/>
+  <path d="M73 21L74.4 24.6L78 26L74.4 27.4L73 31L71.6 27.4L68 26L71.6 24.6L73 21Z" fill="#D8FFE8"/>
+</svg>
