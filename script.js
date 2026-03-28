@@ -1,366 +1,984 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Particle Background for Hero
-    const particlesContainer = document.getElementById('particles-container');
-    if (particlesContainer) {
-        for (let i = 0; i < 30; i++) {
-            let particle = document.createElement('div');
-            particle.classList.add('particle');
-            
-            let size = Math.random() * 3 + 1;
-            let left = Math.random() * 100;
-            let duration = Math.random() * 20 + 10;
-            let delay = Math.random() * 10;
+﻿const CONFIG = {
+  whatsapp: "918669214433",
+  slotCloseHour: 22
+};
 
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-            particle.style.left = `${left}%`;
-            particle.style.animationDuration = `${duration}s`;
-            particle.style.animationDelay = `-${delay}s`;
+const BEAUTY_SERVICES = [
+  {
+    title: "Royal Maharashtrian Bridal",
+    duration: "4.5 Hours",
+    price: 22000,
+    description: "HD bridal coverage with drape and long-wear finish.",
+    image: "media/dipas-beauty-treats/bridal-maharashtrian.jpg",
+    cta: "Book Royal Bridal"
+  },
+  {
+    title: "Rajasthani Heritage Bridal",
+    duration: "4 Hours",
+    price: 23000,
+    description: "Traditional look architecture tuned for event photography.",
+    image: "media/dipas-beauty-treats/bridal-rajasthani.jpg",
+    cta: "Book Heritage Bridal"
+  },
+  {
+    title: "Skin Glow Reset Therapy",
+    duration: "60 Minutes",
+    price: 2800,
+    description: "Hydration and glow correction for smooth makeup base.",
+    image: "media/dipas-beauty-treats/skin-treatment-3.jpg",
+    cta: "Book Skin Session"
+  },
+  {
+    title: "Keratin Smoothening Plan",
+    duration: "120 Minutes",
+    price: 6500,
+    description: "Frizz reduction with salon-grade smooth texture finish.",
+    image: "media/dipas-beauty-treats/hair-treatment-2.jpg",
+    cta: "Book Keratin"
+  },
+  {
+    title: "Party Makeup Signature",
+    duration: "60 Minutes",
+    price: 2500,
+    description: "Quick glam look designed to stay polished in long events.",
+    image: "media/dipas-beauty-treats/party-makeup.jpg",
+    cta: "Book Party Makeup"
+  },
+  {
+    title: "Bridal Skin Prep Program",
+    duration: "4 Sittings",
+    price: 12000,
+    description: "Month-long prep pipeline before wedding and reception.",
+    image: "media/dipas-beauty-treats/skin-treatment-1.jpg",
+    cta: "Start Skin Program"
+  }
+];
 
-            particlesContainer.appendChild(particle);
-        }
+const DIVINE_SERVICES = [
+  {
+    title: "Rapid Clarity Session",
+    duration: "30 Minutes",
+    price: 999,
+    description: "Fast diagnosis for confusion, stress and emotional noise.",
+    image: "media/dipas-divine/consultation.jpg",
+    cta: "Book Clarity Session"
+  },
+  {
+    title: "Numerology + Reiki Alignment",
+    duration: "60 Minutes",
+    price: 1999,
+    description: "Life pattern reading paired with energetic balancing.",
+    image: "media/dipas-divine/numerology-chart-concept.png",
+    cta: "Book Alignment"
+  },
+  {
+    title: "Deep Energy Reset",
+    duration: "90 Minutes",
+    price: 2999,
+    description: "Chakra and aura-focused release for heavy mental load.",
+    image: "media/dipas-divine/reiki-energy-transfer.png",
+    cta: "Book Reset"
+  },
+  {
+    title: "Name Vibration Correction",
+    duration: "45 Minutes",
+    price: 1799,
+    description: "Guided name correction to improve personal number harmony.",
+    image: "media/dipas-divine/numerology-2.jpg",
+    cta: "Book Name Correction"
+  },
+  {
+    title: "Monthly Destiny Roadmap",
+    duration: "120 Minutes",
+    price: 3999,
+    description: "Action timeline for relationships, money and career choices.",
+    image: "media/dipas-divine/chakras-meditation-art.png",
+    cta: "Book Roadmap"
+  },
+  {
+    title: "Aura Cleansing Routine",
+    duration: "60 Minutes",
+    price: 1499,
+    description: "Release stuck emotional residue and restore daily focus.",
+    image: "media/dipas-divine/aura-cleansing.jpg",
+    cta: "Book Aura Session"
+  }
+];
+
+const TAROT_SERVICES = [
+  {
+    title: "Quick Answer Tarot",
+    duration: "30 Minutes",
+    price: 899,
+    description: "Straight answer spread for one priority question.",
+    image: "media/dipas-tarot-oracle/tarot-spread-2.jpg",
+    cta: "Book Quick Tarot"
+  },
+  {
+    title: "Relationship Tarot",
+    duration: "60 Minutes",
+    price: 1799,
+    description: "Compatibility and communication clarity reading.",
+    image: "media/dipas-tarot-oracle/tarot-reader-1.jpg",
+    cta: "Book Relationship Reading"
+  },
+  {
+    title: "Career Direction Reading",
+    duration: "60 Minutes",
+    price: 1699,
+    description: "Compare options and decode path timing confidently.",
+    image: "media/dipas-tarot-oracle/moon-reading.jpg",
+    cta: "Book Career Reading"
+  },
+  {
+    title: "Full Life Compass",
+    duration: "90 Minutes",
+    price: 2599,
+    description: "Comprehensive spread for love, money and personal growth.",
+    image: "media/dipas-tarot-oracle/tarot-reading-close-up.png",
+    cta: "Book Compass Session"
+  },
+  {
+    title: "Monthly Tarot Mentorship",
+    duration: "4 x 30 Minutes",
+    price: 2999,
+    description: "Weekly check-ins for decisions and timing management.",
+    image: "media/dipas-tarot-oracle/tarot-reader-2.jpg",
+    cta: "Book Monthly Mentorship"
+  },
+  {
+    title: "Moon Ritual Reading",
+    duration: "45 Minutes",
+    price: 1299,
+    description: "Cycle-aligned guidance for emotional and spiritual reset.",
+    image: "media/dipas-tarot-oracle/candle-ritual.jpg",
+    cta: "Book Moon Reading"
+  }
+];
+
+const CRYSTALS = [
+  {
+    name: "Rose Quartz Heart",
+    price: 1499,
+    image: "media/crystal-vault/rose-quartz-product-shot.png",
+    description: "Support for self-love and emotional healing.",
+    tags: ["love", "healing"]
+  },
+  {
+    name: "Amethyst Cluster",
+    price: 1899,
+    image: "media/crystal-vault/amethyst-geode-product-shot.png",
+    description: "Calm mind support for sleep and intuitive clarity.",
+    tags: ["focus", "healing"]
+  },
+  {
+    name: "Black Tourmaline Shield",
+    price: 1599,
+    image: "media/crystal-vault/black-tourmaline.jpg",
+    description: "Grounding and energetic protection for daily stress.",
+    tags: ["protection"]
+  },
+  {
+    name: "Citrine Point",
+    price: 1699,
+    image: "media/crystal-vault/citrine.jpg",
+    description: "Prosperity and confidence support for action and sales.",
+    tags: ["abundance"]
+  },
+  {
+    name: "Clear Quartz Tower",
+    price: 1299,
+    image: "media/crystal-vault/clear-quartz.jpg",
+    description: "Energy amplifier for focus rituals and manifestation.",
+    tags: ["focus", "abundance"]
+  },
+  {
+    name: "Lapis Clarity Stone",
+    price: 1499,
+    image: "media/crystal-vault/lapis.jpg",
+    description: "Communication and insight support for bold decisions.",
+    tags: ["focus"]
+  },
+  {
+    name: "Pyrite Prosperity Cube",
+    price: 1399,
+    image: "media/crystal-vault/pyrite.jpg",
+    description: "Career momentum and money mindset activation.",
+    tags: ["abundance", "protection"]
+  },
+  {
+    name: "Selenite Wand Set",
+    price: 1199,
+    image: "media/crystal-vault/selenite.jpg",
+    description: "Aura and space cleansing support for routine reset.",
+    tags: ["protection", "healing"]
+  }
+];
+
+const TESTIMONIALS = [
+  {
+    quote: "Bridal look stayed flawless through the full wedding schedule and photos looked perfect.",
+    author: "Rutuja P. · Jalna"
+  },
+  {
+    quote: "Numerology plus Reiki helped me calm down and choose my career move clearly.",
+    author: "Neha K. · Mantha Road"
+  },
+  {
+    quote: "Tarot reading gave practical steps and timing, not vague advice. Very helpful.",
+    author: "Sonal M. · Sukh Shanti Nagar"
+  },
+  {
+    quote: "Crystal recommendations matched my intention and the order process was very smooth.",
+    author: "Prachi D. · Jalna"
+  }
+];
+
+const BLOGS = [
+  {
+    topic: "Beauty",
+    title: "Glass Skin Bridal Prep Plan in 2026",
+    excerpt: "The trend in bridal makeup is natural skin texture with strategic high points.",
+    image: "media/dipas-beauty-treats/luxury-spa-skin-focus.png",
+    body: [
+      "Bridal clients are moving from heavy matte layers to skin-first prep that still photographs cleanly. The first step is barrier repair and hydration calibration based on your event month.",
+      "Book two to four skin sessions before the wedding week. This supports smooth blending, reduces patchiness, and improves makeup longevity under long function schedules.",
+      "For final week prep, avoid aggressive treatments. Keep calming facials, sleep discipline, and simple at-home hydration to preserve glow and reduce last-minute sensitivity."
+    ]
+  },
+  {
+    topic: "Beauty",
+    title: "Quiet Luxury Makeup Looks Clients Are Booking",
+    excerpt: "Soft contour, premium base, and understated eye structure are leading requests.",
+    image: "media/dipas-beauty-treats/high-fashion-salon-look.png",
+    body: [
+      "Quiet luxury looks focus on polished skin, tailored undertones, and elegant lip balance rather than loud contrast. This style works for receptions, office events, and destination functions.",
+      "Use thin base layers and build only where needed. Weightless products and setting choices are key to keeping the look rich without visible heaviness.",
+      "The trend also favors tailored brow shape and refined lashes over dramatic volume. Result: timeless photographs and better comfort during full-day wear."
+    ]
+  },
+  {
+    topic: "Beauty",
+    title: "Hard Water Hair Damage: Jalna Recovery Routine",
+    excerpt: "A salon + home protocol to reduce frizz, roughness and breakage from hard water.",
+    image: "media/dipas-beauty-treats/hair-treatment-2.jpg",
+    body: [
+      "Hard water buildup can leave hair dry, rough, and difficult to style. Start with scalp detox and mineral-clearing support at a professional setup.",
+      "Follow with weekly hydration masks and protective serum before heat styling. Avoid over-washing, especially during hotter months when shafts are already moisture-depleted.",
+      "In most cases, visible smoothness improves within three sessions when care is consistent and products are selected for your texture and chemical history."
+    ]
+  },
+  {
+    topic: "Divine",
+    title: "Personal Year Number 2026: What to Focus On",
+    excerpt: "A trending numerology framework for planning relationships, money and career timing.",
+    image: "media/dipas-divine/numerology-chart-concept.png",
+    body: [
+      "Personal year numbers are being widely used for practical planning, not just spiritual curiosity. They help you decide whether to push expansion or stabilize current systems.",
+      "When your cycle supports growth, move on launches, networking, and visibility. When it favors closure, focus on cleanup, debt reduction, and emotional release.",
+      "Pairing numerology insight with Reiki makes execution easier because mental noise is lower and action priorities become clearer."
+    ]
+  },
+  {
+    topic: "Divine",
+    title: "Reiki for Burnout Recovery Before It Gets Severe",
+    excerpt: "Why early intervention sessions are becoming popular among professionals.",
+    image: "media/dipas-divine/reiki-energy-transfer.png",
+    body: [
+      "Many clients now book Reiki before burnout peaks. Early sessions help regulate overload signals such as irritability, shallow sleep, and constant mental fatigue.",
+      "A focused reset can calm nervous system pressure and improve attention span within a short window. This is why it is trending among founders and high-output professionals.",
+      "Use post-session routines like hydration, reduced stimulants, and quiet evenings for 24 hours to lock in the calming response."
+    ]
+  },
+  {
+    topic: "Tarot",
+    title: "No-Contact Tarot Questions That Give Clear Answers",
+    excerpt: "A practical way to ask relationship questions without emotional confusion.",
+    image: "media/dipas-tarot-oracle/tarot-reader-1.jpg",
+    body: [
+      "The best no-contact readings avoid yes or no dependency. Ask about communication blocks, emotional readiness, and timing windows instead.",
+      "Framing your questions around actionable outcomes gives better clarity. You can then set one boundary, one timeline, and one follow-up decision.",
+      "This method reduces repetitive overthinking and turns tarot into a planning tool rather than emotional looping."
+    ]
+  },
+  {
+    topic: "Tarot",
+    title: "Career Shift Tarot Spread for 2026 Job Moves",
+    excerpt: "A structured spread to compare opportunities, risk, and next action.",
+    image: "media/dipas-tarot-oracle/tarot-spread-2.jpg",
+    body: [
+      "Career switch readings are trending because many professionals are evaluating growth, income, and flexibility together. A structured spread can map this clearly.",
+      "Use positions for current block, new opportunity quality, hidden challenge, and timing trigger. This keeps interpretation practical and measurable.",
+      "After reading, convert insights into deadlines and application targets so intuition supports execution."
+    ]
+  },
+  {
+    topic: "Tarot",
+    title: "Full Moon Reading Rituals That Stay Practical",
+    excerpt: "How to use moon-cycle tarot without getting lost in vague interpretation.",
+    image: "media/dipas-tarot-oracle/moon-reading.jpg",
+    body: [
+      "Full moon pulls are trending for release work and decision resets. The best approach is simple: one release card, one focus card, one action card.",
+      "Write one sentence per card and one measurable action for the next seven days. This avoids over-analysis and keeps the ritual grounded.",
+      "Repeat monthly and track patterns. Consistent notes improve interpretation quality and confidence over time."
+    ]
+  },
+  {
+    topic: "Crystals",
+    title: "Abundance Desk Setup: Citrine, Pyrite and Quartz",
+    excerpt: "A high-demand crystal combination for business focus and momentum.",
+    image: "media/crystal-vault/net-crystal-9.jpg",
+    body: [
+      "Citrine plus pyrite is trending in prosperity setups for entrepreneurs and freelancers. Clear quartz is often added as an amplifier for intention work.",
+      "Place the trio on your work desk where daily visibility is high. Pair with weekly goal-writing for stronger consistency.",
+      "Keep maintenance simple: cleanse periodically and reset your intention statements every week."
+    ]
+  },
+  {
+    topic: "Crystals",
+    title: "Rose Quartz Reset Routine for Emotional Stability",
+    excerpt: "A modern self-regulation ritual using rose quartz and short breathwork.",
+    image: "media/crystal-vault/rose-quartz-product-shot.png",
+    body: [
+      "Rose quartz routines are popular for emotional grounding and self-worth support. The trend focuses on short, repeatable rituals rather than long ceremonies.",
+      "Use two to three minutes of breathwork while holding the stone, then journal one boundary and one gratitude point.",
+      "This daily structure helps shift reactivity, especially during high-stress periods or relationship transition phases."
+    ]
+  }
+];
+
+const GOAL_MAP = {
+  bridal: {
+    title: "Recommended: Beauty Bridal Stack",
+    text: "Start with bridal consultation, then lock skin prep and event-day makeup timeline.",
+    target: "#beauty",
+    cta: "View Bridal Packages"
+  },
+  skin: {
+    title: "Recommended: Skin + Hair Repair Path",
+    text: "Use a 3-4 week sequence with skin reset and keratin support for visible texture improvement.",
+    target: "#beauty",
+    cta: "See Skin and Hair Services"
+  },
+  stress: {
+    title: "Recommended: Numerology + Reiki",
+    text: "Begin with rapid clarity and continue with deep energy reset if overload is persistent.",
+    target: "#divine",
+    cta: "See Healing Sessions"
+  },
+  clarity: {
+    title: "Recommended: Tarot Decision Spread",
+    text: "Use career or relationship spread for practical next steps and timeline clarity.",
+    target: "#tarot",
+    cta: "See Tarot Services"
+  },
+  prosperity: {
+    title: "Recommended: Abundance Crystal Bundle",
+    text: "Citrine, pyrite and clear quartz are commonly chosen for business confidence and focus.",
+    target: "#crystals",
+    cta: "Shop Abundance Crystals"
+  }
+};
+
+const els = {
+  menuToggle: document.getElementById("menuToggle"),
+  mainNav: document.getElementById("mainNav"),
+  scrollProgress: document.getElementById("scrollProgress"),
+  slotCountdown: document.getElementById("slotCountdown"),
+  yearNow: document.getElementById("yearNow"),
+  beautyServiceGrid: document.getElementById("beautyServiceGrid"),
+  divineServiceGrid: document.getElementById("divineServiceGrid"),
+  tarotServiceGrid: document.getElementById("tarotServiceGrid"),
+  crystalGrid: document.getElementById("crystalGrid"),
+  crystalFilters: document.getElementById("crystalFilters"),
+  goalChips: document.getElementById("goalChips"),
+  goalTitle: document.getElementById("goalTitle"),
+  goalText: document.getElementById("goalText"),
+  goalCta: document.getElementById("goalCta"),
+  heroStageStack: document.getElementById("heroStageStack"),
+  testimonialBox: document.getElementById("testimonialBox"),
+  testimonialContent: document.getElementById("testimonialContent"),
+  testimonialControls: document.getElementById("testimonialControls"),
+  blogGrid: document.getElementById("blogGrid"),
+  blogReaderOverlay: document.getElementById("blogReaderOverlay"),
+  blogReader: document.getElementById("blogReader"),
+  closeBlogReader: document.getElementById("closeBlogReader"),
+  blogReaderImage: document.getElementById("blogReaderImage"),
+  blogReaderTag: document.getElementById("blogReaderTag"),
+  blogReaderTitle: document.getElementById("blogReaderTitle"),
+  blogReaderExcerpt: document.getElementById("blogReaderExcerpt"),
+  blogReaderBody: document.getElementById("blogReaderBody"),
+  leadForm: document.getElementById("leadForm"),
+  leadName: document.getElementById("leadName"),
+  leadPhone: document.getElementById("leadPhone"),
+  leadService: document.getElementById("leadService"),
+  leadMessage: document.getElementById("leadMessage")
+};
+
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const state = {
+  blogReaderOpen: false
+};
+
+const formatINR = (value) =>
+  new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 0
+  }).format(value);
+
+function buildWhatsAppLink(message) {
+  return `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(message)}`;
+}
+
+function createServiceCard(item) {
+  const card = document.createElement("article");
+  card.className = "service-card reveal";
+  card.setAttribute("data-tilt", "");
+  card.innerHTML = `
+    <img src="${item.image}" alt="${item.title}" loading="lazy" />
+    <div class="service-info">
+      <h3>${item.title}</h3>
+      <div class="service-meta">
+        <span class="badge time">${item.duration}</span>
+        <strong class="price">${formatINR(item.price)}</strong>
+      </div>
+      <p>${item.description}</p>
+      <a class="btn btn-ghost" href="${buildWhatsAppLink(`I want to book: ${item.title}`)}" target="_blank" rel="noopener noreferrer">${item.cta}</a>
+    </div>
+  `;
+  return card;
+}
+
+function renderServiceGrid(container, data) {
+  if (!container) return;
+  container.innerHTML = "";
+  data.forEach((item) => {
+    container.appendChild(createServiceCard(item));
+  });
+}
+
+function createCrystalCard(item) {
+  const tags = item.tags.map((tag) => `<span class="product-tag">${tag}</span>`).join("");
+  const card = document.createElement("article");
+  card.className = "product-card reveal";
+  card.setAttribute("data-tilt", "");
+  card.innerHTML = `
+    <img src="${item.image}" alt="${item.name}" loading="lazy" />
+    <div class="product-info">
+      <h3>${item.name}</h3>
+      <strong class="price">${formatINR(item.price)}</strong>
+      <p>${item.description}</p>
+      <div class="product-tags">${tags}</div>
+      <a class="btn btn-primary" href="${buildWhatsAppLink(`I want to order crystal: ${item.name} (${formatINR(item.price)})`)}" target="_blank" rel="noopener noreferrer">Order on WhatsApp</a>
+    </div>
+  `;
+  return card;
+}
+
+function renderCrystals(filter = "all") {
+  if (!els.crystalGrid) return;
+  const items =
+    filter === "all"
+      ? CRYSTALS
+      : CRYSTALS.filter((item) => item.tags.includes(filter));
+
+  els.crystalGrid.innerHTML = "";
+  items.forEach((item, index) => {
+    const card = createCrystalCard(item);
+    card.style.setProperty("--reveal-delay", `${Math.min(index * 50, 250)}ms`);
+    els.crystalGrid.appendChild(card);
+  });
+}
+
+function createBlogCard(blog, index) {
+  const card = document.createElement("article");
+  card.className = "blog-card reveal";
+  card.setAttribute("data-blog-index", String(index));
+  card.innerHTML = `
+    <img src="${blog.image}" alt="${blog.title}" loading="lazy" />
+    <div class="blog-info">
+      <span class="blog-chip">${blog.topic}</span>
+      <h3>${blog.title}</h3>
+      <p>${blog.excerpt}</p>
+      <button type="button" class="btn btn-ghost" data-blog-index="${index}">Read in Detail</button>
+    </div>
+  `;
+  return card;
+}
+
+function renderBlogs() {
+  if (!els.blogGrid) return;
+  els.blogGrid.innerHTML = "";
+  BLOGS.forEach((blog, index) => {
+    const card = createBlogCard(blog, index);
+    card.style.setProperty("--reveal-delay", `${Math.min(index * 45, 260)}ms`);
+    els.blogGrid.appendChild(card);
+  });
+}
+
+function closeBlogReader() {
+  if (!els.blogReaderOverlay || !state.blogReaderOpen) return;
+  state.blogReaderOpen = false;
+  els.blogReaderOverlay.classList.remove("open");
+  window.setTimeout(() => {
+    if (!state.blogReaderOpen) {
+      els.blogReaderOverlay.hidden = true;
+    }
+  }, 220);
+}
+
+function openBlogReader(index) {
+  if (!els.blogReaderOverlay || !els.blogReaderBody || !els.blogReaderImage) return;
+  const blog = BLOGS[index];
+  if (!blog) return;
+
+  els.blogReaderImage.src = blog.image;
+  els.blogReaderImage.alt = blog.title;
+  if (els.blogReaderTag) els.blogReaderTag.textContent = `${blog.topic} Trend`;
+  if (els.blogReaderTitle) els.blogReaderTitle.textContent = blog.title;
+  if (els.blogReaderExcerpt) els.blogReaderExcerpt.textContent = blog.excerpt;
+
+  els.blogReaderBody.innerHTML = "";
+  blog.body.forEach((line) => {
+    const paragraph = document.createElement("p");
+    paragraph.textContent = line;
+    els.blogReaderBody.appendChild(paragraph);
+  });
+
+  els.blogReaderOverlay.hidden = false;
+  requestAnimationFrame(() => {
+    els.blogReaderOverlay.classList.add("open");
+  });
+  state.blogReaderOpen = true;
+
+  if (els.blogReader) {
+    els.blogReader.scrollTop = 0;
+  }
+}
+
+function initBlogReader() {
+  if (!els.blogGrid) return;
+
+  els.blogGrid.addEventListener("click", (event) => {
+    const btn = event.target.closest("[data-blog-index]");
+    if (!btn) return;
+    const index = Number(btn.getAttribute("data-blog-index"));
+    if (Number.isNaN(index)) return;
+    openBlogReader(index);
+  });
+
+  if (els.closeBlogReader) {
+    els.closeBlogReader.addEventListener("click", closeBlogReader);
+  }
+
+  if (els.blogReaderOverlay) {
+    els.blogReaderOverlay.addEventListener("click", (event) => {
+      if (event.target === els.blogReaderOverlay) {
+        closeBlogReader();
+      }
+    });
+  }
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeBlogReader();
+    }
+  });
+}
+
+function setGoal(goalKey) {
+  const goal = GOAL_MAP[goalKey];
+  if (!goal) return;
+
+  if (els.goalTitle) els.goalTitle.textContent = goal.title;
+  if (els.goalText) els.goalText.textContent = goal.text;
+  if (els.goalCta) {
+    els.goalCta.textContent = goal.cta;
+    els.goalCta.setAttribute("href", goal.target);
+    els.goalCta.setAttribute("data-scroll", goal.target);
+  }
+
+  document.querySelectorAll("[data-goal]").forEach((button) => {
+    button.classList.toggle("is-active", button.getAttribute("data-goal") === goalKey);
+  });
+}
+
+function initGoalSelectors() {
+  const goalButtons = document.querySelectorAll("[data-goal]");
+  goalButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const key = button.getAttribute("data-goal");
+      setGoal(key);
+    });
+  });
+}
+
+function initCrystalFilters() {
+  if (!els.crystalFilters) return;
+  els.crystalFilters.addEventListener("click", (event) => {
+    const btn = event.target.closest(".filter-btn");
+    if (!btn) return;
+    const filter = btn.getAttribute("data-filter") || "all";
+
+    els.crystalFilters.querySelectorAll(".filter-btn").forEach((chip) => {
+      const active = chip === btn;
+      chip.classList.toggle("is-active", active);
+      chip.setAttribute("aria-selected", active ? "true" : "false");
+    });
+
+    renderCrystals(filter);
+    initRevealObserver();
+    initTiltCards();
+  });
+}
+
+function initSmoothScroll() {
+  document.addEventListener("click", (event) => {
+    const trigger = event.target.closest("[data-scroll]");
+    if (!trigger) return;
+    const targetSelector = trigger.getAttribute("data-scroll");
+    if (!targetSelector || !targetSelector.startsWith("#")) return;
+
+    const target = document.querySelector(targetSelector);
+    if (!target) return;
+
+    event.preventDefault();
+
+    if (els.mainNav && els.mainNav.classList.contains("is-open")) {
+      els.mainNav.classList.remove("is-open");
+      document.body.classList.remove("menu-open");
+      if (els.menuToggle) {
+        els.menuToggle.setAttribute("aria-expanded", "false");
+      }
     }
 
-    // 2. Scroll Reveal & Parallax Backgrounds
-    const reveals = document.querySelectorAll('.reveal-up, .reveal-fade');
-    const parallaxes = document.querySelectorAll('.parallax');
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
 
-    const scrollHandler = () => {
-        const windowHeight = window.innerHeight;
-        const scrollY = window.scrollY;
+function initMenuToggle() {
+  if (!els.menuToggle || !els.mainNav) return;
+  els.menuToggle.addEventListener("click", () => {
+    const isOpen = els.mainNav.classList.toggle("is-open");
+    els.menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    document.body.classList.toggle("menu-open", isOpen);
+  });
 
-        // Reveal
-        reveals.forEach(el => {
-            const elementTop = el.getBoundingClientRect().top;
-            if (elementTop < windowHeight - 100) {
-                el.classList.add('active');
-            }
-        });
+  document.addEventListener("click", (event) => {
+    const clickedInsideNav = event.target.closest("#mainNav") || event.target.closest("#menuToggle");
+    if (!clickedInsideNav && els.mainNav.classList.contains("is-open")) {
+      els.mainNav.classList.remove("is-open");
+      els.menuToggle.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("menu-open");
+    }
+  });
+}
 
-        // Parallax
-        parallaxes.forEach(bg => {
-            if(window.innerWidth > 768) {
-                const speed = 0.4;
-                bg.style.transform = `translateY(${scrollY * speed}px)`;
-            } else {
-                bg.style.transform = `translateY(0px)`;
-            }
-        });
+function initScrollProgress() {
+  const header = document.querySelector(".site-header");
+  const navLinks = Array.from(document.querySelectorAll(".main-nav a"));
+  const sections = navLinks
+    .map((link) => document.querySelector(link.getAttribute("href")))
+    .filter(Boolean);
+
+  const update = () => {
+    const scrollTop = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = max > 0 ? (scrollTop / max) * 100 : 0;
+    if (els.scrollProgress) {
+      els.scrollProgress.style.width = `${Math.min(progress, 100)}%`;
+    }
+
+    if (header) {
+      header.classList.toggle("is-scrolled", scrollTop > 12);
+    }
+
+    let activeId = "";
+    sections.forEach((section) => {
+      const top = section.offsetTop - 130;
+      const bottom = top + section.offsetHeight;
+      if (scrollTop >= top && scrollTop < bottom) {
+        activeId = `#${section.id}`;
+      }
+    });
+
+    navLinks.forEach((link) => {
+      link.classList.toggle("is-active", link.getAttribute("href") === activeId);
+    });
+  };
+
+  update();
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+}
+
+function initCountdown() {
+  if (!els.slotCountdown) return;
+
+  const updateCountdown = () => {
+    const now = new Date();
+    const closing = new Date(now);
+    closing.setHours(CONFIG.slotCloseHour, 0, 0, 0);
+
+    if (now >= closing) {
+      closing.setDate(closing.getDate() + 1);
+    }
+
+    const diff = closing.getTime() - now.getTime();
+    const hours = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, "0");
+    const minutes = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, "0");
+    const seconds = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, "0");
+
+    els.slotCountdown.textContent = `${hours}h ${minutes}m ${seconds}s`;
+  };
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+}
+
+function initHeroStageRotation() {
+  if (!els.heroStageStack || reduceMotion) return;
+  const cards = Array.from(els.heroStageStack.querySelectorAll(".stage-card"));
+  if (cards.length < 2) return;
+
+  let index = 0;
+  setInterval(() => {
+    cards[index].classList.remove("is-active");
+    index = (index + 1) % cards.length;
+    cards[index].classList.add("is-active");
+  }, 3300);
+}
+
+function initTestimonials() {
+  if (!els.testimonialContent || !els.testimonialControls || !els.testimonialBox) return;
+
+  let pointer = 0;
+  let pausedByHover = false;
+  let pausedBySelect = false;
+  let timerId = null;
+
+  const render = () => {
+    const item = TESTIMONIALS[pointer];
+    els.testimonialContent.innerHTML = `
+      <blockquote>“${item.quote}”</blockquote>
+      <p class="author">${item.author}</p>
+    `;
+    els.testimonialControls.querySelectorAll(".testimonial-dot").forEach((dot, index) => {
+      dot.classList.toggle("is-active", index === pointer);
+      dot.setAttribute("aria-pressed", index === pointer ? "true" : "false");
+    });
+  };
+
+  const stopAuto = () => {
+    if (timerId) {
+      clearInterval(timerId);
+      timerId = null;
+    }
+  };
+
+  const startAuto = () => {
+    if (reduceMotion || pausedBySelect) return;
+    stopAuto();
+    timerId = setInterval(() => {
+      if (pausedByHover || pausedBySelect) return;
+      pointer = (pointer + 1) % TESTIMONIALS.length;
+      render();
+    }, 1000);
+  };
+
+  els.testimonialControls.innerHTML = "";
+  TESTIMONIALS.forEach((item, index) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "testimonial-dot";
+    dot.setAttribute("aria-label", `Select review ${index + 1}`);
+    dot.addEventListener("click", () => {
+      pointer = index;
+      pausedBySelect = true;
+      stopAuto();
+      render();
+    });
+    els.testimonialControls.appendChild(dot);
+  });
+
+  els.testimonialBox.addEventListener("pointerenter", () => {
+    pausedByHover = true;
+  });
+  els.testimonialBox.addEventListener("pointerleave", () => {
+    pausedByHover = false;
+  });
+
+  render();
+  startAuto();
+}
+
+function initLeadForm() {
+  if (!els.leadForm) return;
+
+  els.leadForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const name = (els.leadName?.value || "").trim();
+    const phone = (els.leadPhone?.value || "").trim();
+    const service = els.leadService?.value || "";
+
+    if (!name || !phone || !service) {
+      if (els.leadMessage) {
+        els.leadMessage.textContent = "Please fill all fields before sending.";
+      }
+      return;
+    }
+
+    const message = [
+      "New Website Inquiry",
+      `Name: ${name}`,
+      `Phone: ${phone}`,
+      `Service: ${service}`,
+      "Source: Quick Inquiry Form"
+    ].join("\n");
+
+    if (els.leadMessage) {
+      els.leadMessage.textContent = "Opening WhatsApp with your details...";
+    }
+
+    window.open(buildWhatsAppLink(message), "_blank", "noopener,noreferrer");
+    els.leadForm.reset();
+  });
+}
+
+function initRevealObserver() {
+  const revealNodes = document.querySelectorAll(".reveal");
+
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    revealNodes.forEach((node) => node.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    {
+      rootMargin: "0px 0px -12% 0px",
+      threshold: 0.12
+    }
+  );
+
+  revealNodes.forEach((node) => observer.observe(node));
+}
+
+function initParallaxLayers() {
+  if (reduceMotion) return;
+  const layers = Array.from(document.querySelectorAll(".bg-layer[data-depth]"));
+  if (!layers.length) return;
+
+  let rafId = 0;
+
+  const updateLayers = (clientX, clientY) => {
+    const xNorm = (clientX / window.innerWidth) * 2 - 1;
+    const yNorm = (clientY / window.innerHeight) * 2 - 1;
+
+    layers.forEach((layer) => {
+      const depth = Number(layer.getAttribute("data-depth")) || 0;
+      const tx = xNorm * depth * 26;
+      const ty = yNorm * depth * 20;
+      layer.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+    });
+  };
+
+  window.addEventListener(
+    "pointermove",
+    (event) => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => updateLayers(event.clientX, event.clientY));
+    },
+    { passive: true }
+  );
+}
+
+function initTiltCards() {
+  if (reduceMotion) return;
+
+  const tiltNodes = document.querySelectorAll("[data-tilt]");
+
+  tiltNodes.forEach((node) => {
+    if (node.dataset.tiltReady === "true") return;
+    node.dataset.tiltReady = "true";
+
+    const maxTilt = Number(node.getAttribute("data-tilt-max")) || 8;
+
+    const onMove = (event) => {
+      const rect = node.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width;
+      const y = (event.clientY - rect.top) / rect.height;
+      const tiltX = (0.5 - y) * maxTilt;
+      const tiltY = (x - 0.5) * maxTilt;
+      node.style.transform = `perspective(1300px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-2px)`;
     };
-    window.addEventListener('scroll', scrollHandler, {passive: true});
-    scrollHandler(); // Trigger on load
 
-    // 3. 3D Tilt Effect on Cards (Vanilla JS GSAP-level alternative)
-    const tiltCards = document.querySelectorAll('.tilt-effect');
-    tiltCards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            if(window.innerWidth < 768) return; // Disable on mobile for performance
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = ((y - centerY) / centerY) * -10; // Max 10 deg
-            const rotateY = ((x - centerX) / centerX) * 10;
-            
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-            card.style.transition = 'none';
-        });
-
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-            card.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-        });
-    });
-
-    // 5. Cart & Checkout Systems
-    let cart = JSON.parse(localStorage.getItem('divine_cart')) || [];
-    
-    // Clean up old cart data format
-    cart = cart.map(item => { return { ...item, price: parseInt(item.price) } });
-
-    const cartBadge = document.getElementById('cart-badge');
-    const cartOverlay = document.getElementById('cart-overlay');
-    const cartDrawer = document.getElementById('cart-drawer');
-    const cartItemsContainer = document.getElementById('cart-items');
-    const cartTotalPrice = document.getElementById('cart-total-price');
-    
-    // Elements for listeners
-    const openCartBtn = document.getElementById('open-cart-btn');
-    const closeCartBtn = document.getElementById('close-cart-btn');
-    const checkoutBtn = document.getElementById('checkout-btn');
-
-    // Checkout Modal Elements
-    const coOverlay = document.getElementById('checkout-modal-overlay');
-    const closeCoBtn = document.getElementById('close-checkout-btn');
-    const steps = document.querySelectorAll('.checkout-step');
-    const detailsForm = document.getElementById('details-form');
-    const payOptBtns = document.querySelectorAll('.pay-opt-btn');
-    const backStepBtns = document.querySelectorAll('.back-step-btn');
-    const confirmUpiBtn = document.getElementById('confirm-upi-paid');
-    
-    // Order State
-    let currentOrder = {
-        name: '',
-        phone: '',
-        address: '',
-        total: 0,
-        method: '',
-        items: []
+    const reset = () => {
+      node.style.transform = "";
     };
 
-    function updateCartUI() {
-        cartBadge.innerText = cart.reduce((sum, item) => sum + item.qty, 0);
-        
-        cartItemsContainer.innerHTML = '';
-        let total = 0;
+    node.addEventListener("pointermove", onMove);
+    node.addEventListener("pointerleave", reset);
+    node.addEventListener("pointercancel", reset);
+  });
+}
 
-        if (cart.length === 0) {
-            cartItemsContainer.innerHTML = '<p class="text-muted text-center mt-4">Your cart is empty.</p>';
-        } else {
-            cart.forEach(item => {
-                total += item.price * item.qty;
-                const div = document.createElement('div');
-                div.className = 'cart-item';
-                div.innerHTML = `
-                    ${item.img ? `<img src="${item.img}" class="cart-item-img" alt="${item.name}">` : ''}
-                    <div class="cart-item-info">
-                        <div class="cart-item-title">${item.name}</div>
-                        <div class="cart-item-price">₹${item.price.toLocaleString('en-IN')}</div>
-                        <div class="qty-controls">
-                            <button class="qty-btn dec" data-id="${item.id}">-</button>
-                            <span>${item.qty}</span>
-                            <button class="qty-btn inc" data-id="${item.id}">+</button>
-                        </div>
-                    </div>
-                    <button class="remove-item" data-id="${item.id}">&times;</button>
-                `;
-                cartItemsContainer.appendChild(div);
-            });
-        }
-
-        cartTotalPrice.innerText = `₹${total.toLocaleString('en-IN')}`;
-        currentOrder.total = total;
-        localStorage.setItem('divine_cart', JSON.stringify(cart));
-    }
-
-    function addToCart(itemObj, btnElement = null) {
-        const existing = cart.find(i => i.id === itemObj.id);
-        if (existing) {
-            existing.qty += 1;
-        } else {
-            cart.push({ ...itemObj, qty: 1 });
-        }
-        
-        // Squeeze animation
-        if (btnElement) {
-            btnElement.classList.add('squeeze-bounce');
-            openCartBtn.classList.add('squeeze-bounce', 'btn-glow');
-            setTimeout(() => {
-                btnElement.classList.remove('squeeze-bounce');
-                openCartBtn.classList.remove('squeeze-bounce', 'btn-glow');
-            }, 500);
-        }
-
-        updateCartUI();
-        openCartDrawer();
-    }
-
-    function changeQty(id, delta) {
-        const item = cart.find(i => i.id === id);
-        if (item) {
-            item.qty += delta;
-            if (item.qty <= 0) {
-                cart = cart.filter(i => i.id !== id);
-            }
-            updateCartUI();
-        }
-    }
-
-    function removeItem(id) {
-        cart = cart.filter(i => i.id !== id);
-        updateCartUI();
-    }
-
-    function openCartDrawer() {
-        cartOverlay.classList.add('open');
-        cartDrawer.classList.add('open');
-    }
-    function closeCartDrawer() {
-        cartOverlay.classList.remove('open');
-        cartDrawer.classList.remove('open');
-    }
-
-    // Initialize UI
-    updateCartUI();
-
-    // Rebind after DOM redraws
-    function rebindEvents() {
-        // Service Booking Buttons
-        document.querySelectorAll('.book-service-btn').forEach(btn => {
-            btn.onclick = () => {
-                const service = btn.getAttribute('data-service');
-                const price = parseInt(btn.getAttribute('data-price'));
-                // generate id based on name
-                const id = 'svc_' + service.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
-                addToCart({ id, name: service, price, img: '' }, btn);
-            };
-        });
-        
-        // Product Buttons
-        document.querySelectorAll('.btn-add-cart').forEach(btn => {
-            btn.onclick = () => {
-                const id = btn.getAttribute('data-id');
-                const name = btn.getAttribute('data-name');
-                const price = parseInt(btn.getAttribute('data-price'));
-                const img = btn.getAttribute('data-img');
-                addToCart({ id, name, price, img }, btn);
-            };
-        });
-    }
-    rebindEvents();
-
-    // Cart Listeners
-    openCartBtn.addEventListener('click', openCartDrawer);
-    closeCartBtn.addEventListener('click', closeCartDrawer);
-    cartOverlay.addEventListener('click', closeCartDrawer);
-
-    cartItemsContainer.addEventListener('click', (e) => {
-        if (e.target.classList.contains('inc')) {
-            changeQty(e.target.getAttribute('data-id'), 1);
-        } else if (e.target.classList.contains('dec')) {
-            changeQty(e.target.getAttribute('data-id'), -1);
-        } else if (e.target.classList.contains('remove-item')) {
-            removeItem(e.target.getAttribute('data-id'));
-        }
+function initFaqAccordion() {
+  const details = document.querySelectorAll(".faq-list details");
+  details.forEach((node) => {
+    node.addEventListener("toggle", () => {
+      if (!node.open) return;
+      details.forEach((item) => {
+        if (item !== node) item.open = false;
+      });
     });
+  });
+}
 
-    // Checkout Flow
-    function goToStep(stepNum) {
-        steps.forEach(s => s.classList.remove('active'));
-        document.getElementById(`step-${stepNum}`).classList.add('active');
-    }
-
-    checkoutBtn.addEventListener('click', () => {
-        if (cart.length === 0) return alert('Your cart is empty.');
-        closeCartDrawer();
-        coOverlay.classList.add('open');
-        goToStep(1);
+function registerServiceWorker() {
+  if (!("serviceWorker" in navigator)) return;
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("service-worker.js").catch(() => {
+      // Non-blocking in static hosting if service worker fails.
     });
+  });
+}
 
-    closeCoBtn.addEventListener('click', () => {
-        coOverlay.classList.remove('open');
-    });
+function boot() {
+  renderServiceGrid(els.beautyServiceGrid, BEAUTY_SERVICES);
+  renderServiceGrid(els.divineServiceGrid, DIVINE_SERVICES);
+  renderServiceGrid(els.tarotServiceGrid, TAROT_SERVICES);
+  renderCrystals("all");
+  renderBlogs();
 
-    backStepBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            goToStep(btn.getAttribute('data-target'));
-        });
-    });
+  if (els.yearNow) {
+    els.yearNow.textContent = String(new Date().getFullYear());
+  }
 
-    detailsForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        currentOrder.name = document.getElementById('co-name').value;
-        currentOrder.phone = document.getElementById('co-phone').value;
-        currentOrder.address = document.getElementById('co-address').value;
-        goToStep(2);
-    });
+  setGoal("bridal");
+  initGoalSelectors();
+  initCrystalFilters();
+  initSmoothScroll();
+  initMenuToggle();
+  initScrollProgress();
+  initCountdown();
+  initHeroStageRotation();
+  initTestimonials();
+  initBlogReader();
+  initLeadForm();
+  initRevealObserver();
+  initParallaxLayers();
+  initTiltCards();
+  initFaqAccordion();
+  registerServiceWorker();
+}
 
-    payOptBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const method = btn.getAttribute('data-method');
-            currentOrder.method = method;
-            
-            if (method === 'UPI') {
-                document.getElementById('upi-total-display').innerText = `₹${currentOrder.total.toLocaleString('en-IN')}`;
-                // Set Up Deep Link: target Jalna business
-                const upiLink = `upi://pay?pn=DipasUniverse&pa=8669214433@upi&am=${currentOrder.total}&cu=INR`;
-                document.getElementById('upi-deep-link').href = upiLink;
-                goToStep('3-upi');
-            } else {
-                finalizeOrder();
-            }
-        });
-    });
-
-    confirmUpiBtn.addEventListener('click', finalizeOrder);
-
-    function finalizeOrder() {
-        goToStep('finish');
-        currentOrder.items = cart;
-        
-        // Mocked timeout for UX
-        setTimeout(() => {
-            sendOrderToGoogleSheet(currentOrder)
-                .then(() => {
-                    sendToWhatsApp(currentOrder);
-                })
-                .catch(err => {
-                    console.error('Sheet posting failed, proceeding to WP anyway', err);
-                    sendToWhatsApp(currentOrder);
-                });
-        }, 1500);
-    }
-
-    function sendOrderToGoogleSheet(order) {
-        const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
-        
-        const payload = {
-            action: 'createOrder',
-            data: {
-                name: order.name,
-                phone: order.phone,
-                address: order.address || 'N/A',
-                items: order.items.map(i => `${i.name} (x${i.qty})`).join(', '),
-                total: order.total,
-                method: order.method
-            }
-        };
-
-        if (scriptURL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL') {
-            return Promise.resolve();
-        }
-
-        return fetch(scriptURL, {
-            method: 'POST',
-            body: JSON.stringify(payload)
-        });
-    }
-
-    function sendToWhatsApp(order) {
-        // Format message
-        let itemsStr = order.items.map(i => `• ${i.name} (x${i.qty}) - ₹${i.price * i.qty}`).join('\n');
-        
-        const message = `*🌟 New Dipa's Universe Booking/Order*\n\n*Name:* ${order.name}\n*Phone:* ${order.phone}\n*Address:* ${order.address || 'N/A'}\n\n*Cart:*\n${itemsStr}\n\n*Total:* ₹${order.total}\n*Payment Method:* ${order.method}\n\n_Thank you for choosing Sukhshanti Nagar's finest._`;
-        
-        const encode = encodeURIComponent(message);
-        const whaNumber = '918669214433'; // Official Jalna number
-        
-        // Clear cart
-        cart = [];
-        updateCartUI();
-        
-        // Redirect
-        window.location.href = `https://wa.me/${whaNumber}?text=${encode}`;
-    }
-
-    // Dynamic Year in footer
-    if (document.getElementById('year')) {
-        document.getElementById('year').innerText = new Date().getFullYear();
-    }
-
-    // Register Service Worker for PWA
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('service-worker.js')
-                .then(registration => {
-                    console.log('ServiceWorker registration successful');
-                })
-                .catch(err => {
-                    console.log('ServiceWorker registration failed: ', err);
-                });
-        });
-    }
-});
+boot();

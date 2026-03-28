@@ -1,0 +1,18 @@
+﻿<svg width="980" height="980" viewBox="0 0 980 980" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="core" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(510 470) rotate(123) scale(420 520)">
+      <stop offset="0" stop-color="#FFD29A" stop-opacity="0.88"/>
+      <stop offset="0.38" stop-color="#65E4CF" stop-opacity="0.62"/>
+      <stop offset="0.74" stop-color="#5EA5FF" stop-opacity="0.36"/>
+      <stop offset="1" stop-color="#4A7AC8" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blurMe" x="0" y="0" width="980" height="980" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="26"/>
+    </filter>
+  </defs>
+  <g filter="url(#blurMe)">
+    <circle cx="490" cy="490" r="290" fill="url(#core)"/>
+    <circle cx="560" cy="420" r="170" fill="#FFE2BF" fill-opacity="0.25"/>
+    <circle cx="400" cy="570" r="190" fill="#67DCC8" fill-opacity="0.23"/>
+  </g>
+</svg>

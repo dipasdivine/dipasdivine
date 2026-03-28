@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" fill="none">
+  <defs>
+    <linearGradient id="cap" x1="64" y1="190" x2="157" y2="83" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10212F"/>
+      <stop offset="1" stop-color="#355673"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="84" y1="136" x2="138" y2="74" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B7C5D9"/>
+      <stop offset="0.5" stop-color="#F4FAFF"/>
+      <stop offset="1" stop-color="#98A8C2"/>
+    </linearGradient>
+    <linearGradient id="lip" x1="120" y1="82" x2="166" y2="20" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#CE4068"/>
+      <stop offset="1" stop-color="#F07CA0"/>
+    </linearGradient>
+  </defs>
+  <path d="M66 183.6C66 189.3 70.7 194 76.4 194H144.2C149.9 194 154.6 189.3 154.6 183.6V132.6H66V183.6Z" fill="url(#cap)"/>
+  <rect x="78" y="96" width="64" height="46" rx="8" fill="url(#metal)"/>
+  <path d="M95 96V72.8C95 57.8 102.5 47.9 111.2 42.3L119.8 36.8C126.9 32.2 136 37.3 136 45.8V96H95Z" fill="url(#lip)"/>
+  <path d="M66 132.6H154.6" stroke="#6E92B1" stroke-width="8" stroke-linecap="round"/>
+  <path d="M95 73.8L136 45.6" stroke="#F8B0C8" stroke-width="3" stroke-linecap="round"/>
+</svg>

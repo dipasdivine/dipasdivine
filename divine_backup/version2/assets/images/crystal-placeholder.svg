@@ -1,0 +1,12 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="Crystal placeholder">
+  <defs>
+    <linearGradient id="crbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1231"/>
+      <stop offset="100%" stop-color="#0b0b0e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#crbg)"/>
+  <polygon points="350,640 470,250 610,640" fill="#6D28D9" fill-opacity="0.5"/>
+  <polygon points="560,640 680,210 840,640" fill="#D4AF37" fill-opacity="0.45"/>
+  <text x="600" y="740" text-anchor="middle" fill="#D4AF37" font-family="Arial, sans-serif" font-size="42" font-weight="700">Crystal Placeholder</text>
+</svg>
