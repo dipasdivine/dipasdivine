@@ -1,0 +1,21 @@
+{
+  "name": "Divine Realms",
+  "short_name": "Divine",
+  "description": "Premium Mystical Luxury & Wellness",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0B0B0E",
+  "theme_color": "#0B0B0E",
+  "icons": [
+    {
+      "src": "https://via.placeholder.com/192/6D28D9/FFFFFF?text=DR",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://via.placeholder.com/512/6D28D9/FFFFFF?text=DR",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
