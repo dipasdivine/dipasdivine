@@ -1,0 +1,29 @@
+﻿<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="spark" x1="20" y1="20" x2="1540" y2="1160" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#67B2FF" stop-opacity="0.72"/>
+      <stop offset="1" stop-color="#5EDDCB" stop-opacity="0.45"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1200" fill="none"/>
+  <g stroke="url(#spark)" stroke-opacity="0.45" stroke-width="1.2">
+    <path d="M40 220H1560"/>
+    <path d="M40 380H1560"/>
+    <path d="M40 540H1560"/>
+    <path d="M40 700H1560"/>
+    <path d="M40 860H1560"/>
+    <path d="M200 60V1140"/>
+    <path d="M420 60V1140"/>
+    <path d="M640 60V1140"/>
+    <path d="M860 60V1140"/>
+    <path d="M1080 60V1140"/>
+    <path d="M1300 60V1140"/>
+  </g>
+  <g fill="#DDF6FF" fill-opacity="0.5">
+    <circle cx="200" cy="220" r="3"/>
+    <circle cx="420" cy="540" r="3"/>
+    <circle cx="860" cy="380" r="3"/>
+    <circle cx="1080" cy="860" r="3"/>
+    <circle cx="1300" cy="700" r="3"/>
+  </g>
+</svg>
